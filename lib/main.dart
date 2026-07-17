@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:calorio/categories.dart';
+import 'package:calorio/screens/categories.dart';
 
 final theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
