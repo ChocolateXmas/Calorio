@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calorio/models/category.dart';
+import 'package:calorio/data/dummy_data.dart';
+import 'package:calorio/screens/meals.dart';
 
 class CategoryGridItem extends StatelessWidget {
   const CategoryGridItem({super.key, required this.category});
@@ -11,7 +13,17 @@ class CategoryGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => MealsScreen(
+              title: category.title,
+              meals: dummyMeals,
+            ),
+          ),
+        );
+      },
       splashColor: Theme.of(context).primaryColor,
       borderRadius: _itemBorder,
       child: Container(
