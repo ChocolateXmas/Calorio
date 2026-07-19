@@ -1,9 +1,29 @@
-import 'package:calorio/data/dummy_data.dart';
-import 'package:calorio/widgets/category_grid_item.dart';
 import 'package:flutter/material.dart';
+import 'package:calorio/models/category.dart';
+import 'package:calorio/models/meal.dart';
+import 'package:calorio/screens/meals.dart';
+import 'package:calorio/widgets/category_grid_item.dart';
+import 'package:calorio/data/dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
+
+  void _selectCategory(BuildContext ctx, Category category) {
+    final List<Meal> mealsByCategory = dummyMeals
+        .where(
+          (meal) => meal.categories.contains(category.id),
+        )
+        .toList();
+    Navigator.push(
+      ctx,
+      MaterialPageRoute(
+        builder: (BuildContext context) => MealsScreen(
+          title: category.title,
+          meals: mealsByCategory,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +42,12 @@ class CategoriesScreen extends StatelessWidget {
         ),
         children: [
           for (final category in availableCategories)
-            CategoryGridItem(category: category),
+            CategoryGridItem(
+              category: category,
+              onSelectedCategory: () {
+                _selectCategory(context, category);
+              },
+            ),
         ],
       ),
     );
