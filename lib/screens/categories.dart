@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:calorio/models/category.dart';
 import 'package:calorio/models/meal.dart';
 import 'package:calorio/screens/meals.dart';
-import 'package:calorio/widgets/category_grid_item.dart';
+import 'package:calorio/widgets/category_widgets/category_grid_item.dart';
 import 'package:calorio/data/dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
