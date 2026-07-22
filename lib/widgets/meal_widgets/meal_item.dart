@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:calorio/widgets/meal_widgets/meal_details.dart';
 
 import 'package:calorio/models/meal.dart';
 import 'package:calorio/widgets/meal_widgets/meal_item_trait.dart';
@@ -27,7 +28,14 @@ class MealItem extends StatelessWidget {
       elevation: 5,
       shadowColor: Colors.white60,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => MealDetailsScreen(meal: meal),
+            ),
+          );
+        },
         child: Stack(
           children: [
             FadeInImage(
