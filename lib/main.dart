@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:calorio/screens/categories.dart';
+import 'package:calorio/screens/tabs.dart';
 
 final theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: theme,
       home: Scaffold(
-        body: const CategoriesScreen(),
+        body: const TabsScreen(),
       ),
     );
   }
