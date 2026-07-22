@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calorio/screens/categories.dart';
 import 'package:calorio/screens/meals.dart';
-
-import 'package:calorio/data/dummy_data.dart';
+import 'package:calorio/models/meal.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -15,6 +14,15 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
+  final List<Meal> _favoriteMeals = [];
+
+  void _toggleFavoriteMeal(Meal meal) {
+    if (_favoriteMeals.contains(meal)) {
+      _favoriteMeals.remove(meal);
+    } else {
+      _favoriteMeals.add(meal);
+    }
+  }
 
   void _selectPage(int index) {
     setState(() {
@@ -24,10 +32,15 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget selectedPage = CategoriesScreen();
+    Widget selectedPage = CategoriesScreen(
+      onToggleFavorite: _toggleFavoriteMeal,
+    );
     String activePageTitle = 'Categories';
     if (_selectedPageIndex == 1) {
-      selectedPage = MealsScreen(meals: dummyMeals);
+      selectedPage = MealsScreen(
+        meals: _favoriteMeals,
+        onToggleFavorite: _toggleFavoriteMeal,
+      );
       activePageTitle = 'Your Favorite Meals';
     }
     return Scaffold(

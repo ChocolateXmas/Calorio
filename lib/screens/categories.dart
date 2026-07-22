@@ -6,7 +6,8 @@ import 'package:calorio/widgets/category_widgets/category_grid_item.dart';
 import 'package:calorio/data/dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({super.key, required this.onToggleFavorite});
+  final void Function(Meal meal) onToggleFavorite;
 
   void _selectCategory(BuildContext ctx, Category category) {
     final List<Meal> mealsByCategory = dummyMeals
@@ -20,6 +21,7 @@ class CategoriesScreen extends StatelessWidget {
         builder: (BuildContext context) => MealsScreen(
           title: category.title,
           meals: mealsByCategory,
+          onToggleFavorite: onToggleFavorite,
         ),
       ),
     );
