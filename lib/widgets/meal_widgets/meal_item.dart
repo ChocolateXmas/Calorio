@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:calorio/widgets/meal_widgets/meal_details.dart';
 
 import 'package:calorio/models/meal.dart';
 import 'package:calorio/widgets/meal_widgets/meal_item_trait.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({super.key, required this.meal});
+  const MealItem({super.key, required this.meal, required this.onSelectMeal});
 
   final Meal meal;
+  final void Function(Meal meal) onSelectMeal;
 
   String get complexityLabel =>
       '${meal.complexity.name[0].toUpperCase()}${meal.complexity.name.substring(1)}';
@@ -29,12 +29,7 @@ class MealItem extends StatelessWidget {
       shadowColor: Colors.white60,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) => MealDetailsScreen(meal: meal),
-            ),
-          );
+          onSelectMeal(meal);
         },
         child: Stack(
           children: [

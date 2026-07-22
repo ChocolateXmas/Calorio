@@ -1,3 +1,4 @@
+import 'package:calorio/widgets/meal_widgets/meal_details.dart';
 import 'package:flutter/material.dart';
 import 'package:calorio/models/meal.dart';
 import 'package:calorio/widgets/meal_widgets/meal_item.dart';
@@ -8,12 +9,25 @@ class MealsScreen extends StatelessWidget {
   final String title;
   final List<Meal> meals;
 
+  void _selectMeal(BuildContext context, Meal meal) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => MealDetailsScreen(meal: meal),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget content = (meals.isNotEmpty)
         ? ListView.builder(
             itemCount: meals.length,
-            itemBuilder: (context, index) => MealItem(meal: meals[index]),
+            itemBuilder: (context, index) => MealItem(
+              meal: meals[index],
+              onSelectMeal: (meal) {
+                _selectMeal(context, meal);
+              },
+            ),
           )
         : Center(
             child: Column(

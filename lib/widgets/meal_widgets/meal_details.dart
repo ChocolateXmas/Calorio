@@ -13,7 +13,12 @@ class MealDetailsScreen extends StatelessWidget {
         title: Text(meal.title),
       ),
       body: Center(
-        child: Image.network(meal.imageURL),
+        child: Image.network(
+          meal.imageURL,
+          height: 300,
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
