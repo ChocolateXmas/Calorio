@@ -27,9 +27,11 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 
+  bool _isFavorite(Meal meal) => _favoriteMeals.contains(meal);
+
   void _toggleFavoriteMeal(Meal meal) {
     setState(() {
-      if (_favoriteMeals.contains(meal)) {
+      if (_isFavorite(meal)) {
         _favoriteMeals.remove(meal);
         _toggleMealFavoriteStatus('Meal Removed From Favorites');
       } else {
@@ -55,12 +57,14 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     Widget selectedPage = CategoriesScreen(
+      isFavorite: _isFavorite,
       onToggleFavorite: _toggleFavoriteMeal,
     );
     String activePageTitle = 'Categories';
     if (_selectedPageIndex == 1) {
       selectedPage = MealsScreen(
         meals: _favoriteMeals,
+        isFavorite: _isFavorite,
         onToggleFavorite: _toggleFavoriteMeal,
       );
       activePageTitle = 'Your Favorite Meals';

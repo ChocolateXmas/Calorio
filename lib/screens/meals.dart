@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:calorio/models/meal.dart';
 import 'package:calorio/widgets/meal_widgets/meal_item.dart';
-import 'package:calorio/widgets/meal_widgets/meal_details.dart';
+import 'package:calorio/widgets/meal_widgets/meal_details/meal_details.dart';
 
 class MealsScreen extends StatelessWidget {
   const MealsScreen({
     super.key,
     this.title,
     required this.meals,
+    required this.isFavorite,
     required this.onToggleFavorite,
   });
 
   final String? title;
   final List<Meal> meals;
+  final bool Function(Meal meal) isFavorite;
   final void Function(Meal meal) onToggleFavorite;
 
   void _selectMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) =>
-            MealDetailsScreen(meal: meal, onToggleFavorite: onToggleFavorite),
+        builder: (ctx) => MealDetailsScreen(
+          meal: meal,
+          isFavorite: isFavorite(meal),
+          onToggleFavorite: onToggleFavorite,
+        ),
       ),
     );
   }

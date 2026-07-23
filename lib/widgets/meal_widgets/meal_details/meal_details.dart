@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:calorio/models/meal.dart';
+import 'package:calorio/widgets/meal_widgets/meal_details/favorite_toggle_button.dart';
 
 class MealDetailsScreen extends StatelessWidget {
   const MealDetailsScreen({
     super.key,
     required this.meal,
+    required this.isFavorite,
     required this.onToggleFavorite,
   });
 
   final Meal meal;
+  final bool isFavorite;
   final void Function(Meal meal) onToggleFavorite;
 
   Container _divider(BuildContext context) => Container(
@@ -24,11 +27,10 @@ class MealDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
-          IconButton(
-            onPressed: () {
-              onToggleFavorite(meal);
-            },
-            icon: Icon(Icons.star_outline),
+          FavoriteToggleButton(
+            meal: meal,
+            isFavorite: isFavorite,
+            onToggleFavorite: onToggleFavorite,
           ),
         ],
       ),
