@@ -12,6 +12,9 @@ class FiltersScreen extends StatefulWidget {
 
 class _FiltersScreenState extends State<FiltersScreen> {
   bool _glutenFreeFilter = false;
+  bool _lactoseFreeFilter = false;
+  bool _veganFilter = false;
+  bool _vegetarianFilter = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
             onChanged: (isChanged) {
               setState(() => _glutenFreeFilter = isChanged);
             },
-
             activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
             activeTrackColor: Theme.of(context).colorScheme.tertiary,
             contentPadding: EdgeInsets.only(left: 34, right: 28),
@@ -49,6 +51,87 @@ class _FiltersScreenState extends State<FiltersScreen> {
             ),
             subtitle: Text(
               'Only include gluten-free meals',
+              style:
+                  Theme.of(
+                    context,
+                  ).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+          ),
+          SwitchListTile(
+            value: _lactoseFreeFilter,
+            onChanged: (isChanged) {
+              setState(() => _lactoseFreeFilter = isChanged);
+            },
+            activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
+            activeTrackColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: EdgeInsets.only(left: 34, right: 28),
+            title: Text(
+              'Lactose-Free',
+              style:
+                  Theme.of(
+                    context,
+                  ).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+            subtitle: Text(
+              'Only include lactose-free meals',
+              style:
+                  Theme.of(
+                    context,
+                  ).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+          ),
+          SwitchListTile(
+            value: _veganFilter,
+            onChanged: (isChanged) {
+              setState(() => _veganFilter = isChanged);
+            },
+            activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
+            activeTrackColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: EdgeInsets.only(left: 34, right: 28),
+            title: Text(
+              'Vegan',
+              style:
+                  Theme.of(
+                    context,
+                  ).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+            subtitle: Text(
+              'Only include vegan meals',
+              style:
+                  Theme.of(
+                    context,
+                  ).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+          ),
+          SwitchListTile(
+            value: _vegetarianFilter,
+            onChanged: (isChanged) {
+              setState(() => _vegetarianFilter = isChanged);
+            },
+            activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
+            activeTrackColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: EdgeInsets.only(left: 34, right: 28),
+            title: Text(
+              'Vegetarian',
+              style:
+                  Theme.of(
+                    context,
+                  ).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
+            subtitle: Text(
+              'Only include vegetarian meals',
               style:
                   Theme.of(
                     context,
