@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:calorio/screens/categories.dart';
 import 'package:calorio/screens/meals.dart';
+import 'package:calorio/screens/filters.dart';
 import 'package:calorio/models/meal.dart';
 import 'package:calorio/widgets/drawer/main_drawer.dart';
-import 'package:calorio/screens/filters.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -48,7 +48,7 @@ class _TabsScreenState extends State<TabsScreen> {
   void _setScreen(String identifier) {
     Navigator.of(context).pop(); // close the side drawer before pushing
     if (identifier == 'filters') {
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context).push(
         MaterialPageRoute(builder: (ctx) => const FiltersScreen()),
       );
     }
