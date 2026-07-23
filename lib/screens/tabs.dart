@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:calorio/screens/categories.dart';
 import 'package:calorio/screens/meals.dart';
 import 'package:calorio/models/meal.dart';
+import 'package:calorio/widgets/drawer/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -59,6 +60,7 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text(activePageTitle),
         centerTitle: true,
       ),
+      drawer: const MainDrawer(),
       body: selectedPage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
