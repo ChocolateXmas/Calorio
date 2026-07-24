@@ -5,6 +5,14 @@ import 'package:calorio/screens/filters.dart';
 import 'package:calorio/models/meal.dart';
 import 'package:calorio/widgets/drawer/main_drawer.dart';
 
+// Constant fallback to default filters settings
+const kInitialFilters = {
+  Filter.glutenFree: false,
+  Filter.lactoseFree: false,
+  Filter.vegan: false,
+  Filter.vegetarian: false,
+};
+
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
 
@@ -17,6 +25,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
   final List<Meal> _favoriteMeals = [];
+  Map<Filter, bool> filterSelections = kInitialFilters;
 
   void _toggleMealFavoriteStatus(String msg) {
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -45,12 +54,13 @@ class _TabsScreenState extends State<TabsScreen> {
     setState(() => _selectedPageIndex = index);
   }
 
-  void _setScreen(String identifier) {
+  void _setScreen(String identifier) async {
     Navigator.of(context).pop(); // close the side drawer before pushing
     if (identifier == 'filters') {
-      Navigator.of(context).push(
+      final result = await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(builder: (ctx) => const FiltersScreen()),
       );
+      filterSelections = result ?? kInitialFilters;
     }
   }
 
