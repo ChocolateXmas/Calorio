@@ -8,15 +8,17 @@ import 'package:calorio/data/dummy_data.dart';
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({
     super.key,
+    required this.mealList,
     required this.onToggleFavorite,
     required this.isFavorite,
   });
 
+  final List<Meal> mealList;
   final bool Function(Meal meal) isFavorite;
   final void Function(Meal meal) onToggleFavorite;
 
   void _selectCategory(BuildContext ctx, Category category) {
-    final List<Meal> mealsByCategory = dummyMeals
+    final List<Meal> mealsByCategory = mealList
         .where(
           (meal) => meal.categories.contains(category.id),
         )
