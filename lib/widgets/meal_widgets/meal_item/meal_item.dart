@@ -51,10 +51,22 @@ class MealItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    MealFilterIcon(asset: 'assets/svg/gluten-free.svg'),
-                    MealFilterIcon(asset: 'assets/svg/lactose-free.svg'),
-                    MealFilterIcon(asset: 'assets/svg/vegan.svg'),
-                    MealFilterIcon(asset: 'assets/svg/vegetarian.svg'),
+                    MealFilterIcon(
+                      asset: 'assets/svg/gluten-free.svg',
+                      isActive: meal.isGlutenFree,
+                    ),
+                    MealFilterIcon(
+                      asset: 'assets/svg/lactose-free.svg',
+                      isActive: meal.isLactoseFree,
+                    ),
+                    MealFilterIcon(
+                      asset: 'assets/svg/vegan.svg',
+                      isActive: meal.isVegan,
+                    ),
+                    MealFilterIcon(
+                      asset: 'assets/svg/vegetarian.svg',
+                      isActive: meal.isVegetarian,
+                    ),
                   ],
                 ),
               ),

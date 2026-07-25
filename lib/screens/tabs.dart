@@ -76,7 +76,6 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(_filterSelections);
     final List<Meal> availableMeals = dummyMeals.where((meal) {
       if (_filterSelections[Filter.glutenFree]! && !meal.isGlutenFree) {
         return false;

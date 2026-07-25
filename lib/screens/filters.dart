@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:calorio/widgets/meal_widgets/meal_item/meal_filter_icon.dart';
+import 'package:calorio/core/constants/app_assets.dart';
 
 enum Filter {
   glutenFree,
@@ -42,6 +44,44 @@ class _FiltersScreenState extends State<FiltersScreen> {
     _vegetarianFilter = widget.vegetarianFilter;
   }
 
+  SwitchListTile _getCustomTile(
+    bool cValue,
+    ValueChanged<bool> onChanged,
+    String iconAsset,
+    String cTitle,
+    String cSubtitle,
+  ) {
+    return SwitchListTile(
+      value: cValue,
+      onChanged: onChanged,
+      activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
+      activeTrackColor: Theme.of(context).colorScheme.tertiary,
+      contentPadding: EdgeInsets.symmetric(horizontal: 25),
+      secondary: MealFilterIcon(
+        asset: iconAsset,
+        size: 30,
+      ),
+      title: Text(
+        cTitle,
+        style:
+            Theme.of(
+              context,
+            ).textTheme.titleLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+      ),
+      subtitle: Text(
+        cSubtitle,
+        style:
+            Theme.of(
+              context,
+            ).textTheme.labelMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,113 +103,41 @@ class _FiltersScreenState extends State<FiltersScreen> {
         }),
         child: Column(
           children: [
-            SwitchListTile(
-              value: _glutenFreeFilter,
-              onChanged: (isChanged) {
+            _getCustomTile(
+              _glutenFreeFilter,
+              (isChanged) {
                 setState(() => _glutenFreeFilter = isChanged);
               },
-              activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
-              activeTrackColor: Theme.of(context).colorScheme.tertiary,
-              contentPadding: EdgeInsets.only(left: 34, right: 28),
-              title: Text(
-                'Gluten-Free',
-                style:
-                    Theme.of(
-                      context,
-                    ).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
-              subtitle: Text(
-                'Only include gluten-free meals',
-                style:
-                    Theme.of(
-                      context,
-                    ).textTheme.labelMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
+              AppAssets.glutenFree,
+              'Gluten-Free',
+              'Only include gluten-free meals',
             ),
-            SwitchListTile(
-              value: _lactoseFreeFilter,
-              onChanged: (isChanged) {
+            _getCustomTile(
+              _lactoseFreeFilter,
+              (isChanged) {
                 setState(() => _lactoseFreeFilter = isChanged);
               },
-              activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
-              activeTrackColor: Theme.of(context).colorScheme.tertiary,
-              contentPadding: EdgeInsets.only(left: 34, right: 28),
-              title: Text(
-                'Lactose-Free',
-                style:
-                    Theme.of(
-                      context,
-                    ).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
-              subtitle: Text(
-                'Only include lactose-free meals',
-                style:
-                    Theme.of(
-                      context,
-                    ).textTheme.labelMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
+              AppAssets.lactoseFree,
+              'Lactose-Free',
+              'Only include lactose-free meals',
             ),
-            SwitchListTile(
-              value: _veganFilter,
-              onChanged: (isChanged) {
+            _getCustomTile(
+              _veganFilter,
+              (isChanged) {
                 setState(() => _veganFilter = isChanged);
               },
-              activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
-              activeTrackColor: Theme.of(context).colorScheme.tertiary,
-              contentPadding: EdgeInsets.only(left: 34, right: 28),
-              title: Text(
-                'Vegan',
-                style:
-                    Theme.of(
-                      context,
-                    ).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
-              subtitle: Text(
-                'Only include vegan meals',
-                style:
-                    Theme.of(
-                      context,
-                    ).textTheme.labelMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
+              AppAssets.vegan,
+              'Vegan',
+              'Only include vegan meals',
             ),
-            SwitchListTile(
-              value: _vegetarianFilter,
-              onChanged: (isChanged) {
+            _getCustomTile(
+              _vegetarianFilter,
+              (isChanged) {
                 setState(() => _vegetarianFilter = isChanged);
               },
-              activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
-              activeTrackColor: Theme.of(context).colorScheme.tertiary,
-              contentPadding: EdgeInsets.only(left: 34, right: 28),
-              title: Text(
-                'Vegetarian',
-                style:
-                    Theme.of(
-                      context,
-                    ).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
-              subtitle: Text(
-                'Only include vegetarian meals',
-                style:
-                    Theme.of(
-                      context,
-                    ).textTheme.labelMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-              ),
+              AppAssets.vegetarian,
+              'Vegetarian',
+              'Only include vegetarian meals',
             ),
           ],
         ),
