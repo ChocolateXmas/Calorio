@@ -61,10 +61,7 @@ class _TabsScreenState extends State<TabsScreen> {
       final result = await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(
           builder: (ctx) => FiltersScreen(
-            glutenFreeFilter: _filterSelections[Filter.glutenFree]!,
-            lactoseFreeFilter: _filterSelections[Filter.lactoseFree]!,
-            veganFilter: _filterSelections[Filter.vegan]!,
-            vegetarianFilter: _filterSelections[Filter.vegetarian]!,
+            currentFilters: _filterSelections,
           ),
         ),
       );
