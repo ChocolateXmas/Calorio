@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:calorio/models/meal.dart';
-import 'package:calorio/widgets/meal_widgets/meal_item.dart';
+import 'package:calorio/widgets/meal_widgets/meal_item/meal_item.dart';
 import 'package:calorio/widgets/meal_widgets/meal_details/meal_details.dart';
 
 class MealsScreen extends StatelessWidget {

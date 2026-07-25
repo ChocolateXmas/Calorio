@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import 'package:calorio/models/meal.dart';
-import 'package:calorio/widgets/meal_widgets/meal_item_trait.dart';
+import 'package:calorio/widgets/meal_widgets/meal_item/meal_filter_icon.dart';
+import 'package:calorio/widgets/meal_widgets/meal_item/meal_item_trait.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem({super.key, required this.meal, required this.onSelectMeal});
@@ -39,6 +40,24 @@ class MealItem extends StatelessWidget {
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              left: 0,
+              child: Container(
+                color: Colors.black54,
+                padding: EdgeInsets.symmetric(horizontal: 44, vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    MealFilterIcon(asset: 'assets/svg/gluten-free.svg'),
+                    MealFilterIcon(asset: 'assets/svg/lactose-free.svg'),
+                    MealFilterIcon(asset: 'assets/svg/vegan.svg'),
+                    MealFilterIcon(asset: 'assets/svg/vegetarian.svg'),
+                  ],
+                ),
+              ),
             ),
             Positioned(
               bottom: 0,
