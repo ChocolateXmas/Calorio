@@ -35,14 +35,14 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
 
   SwitchListTile _getCustomTile(
     bool cValue,
-    ValueChanged<bool> onChanged,
+    ValueChanged<bool> onChangedFn,
     String iconAsset,
     String cTitle,
     String cSubtitle,
   ) {
     return SwitchListTile(
       value: cValue,
-      onChanged: onChanged,
+      onChanged: onChangedFn,
       activeThumbColor: Theme.of(context).colorScheme.onPrimaryFixed,
       activeTrackColor: Theme.of(context).colorScheme.tertiary,
       contentPadding: EdgeInsets.symmetric(horizontal: 25),
