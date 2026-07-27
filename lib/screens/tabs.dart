@@ -6,7 +6,6 @@ import 'package:calorio/screens/meals.dart';
 import 'package:calorio/screens/filters.dart';
 import 'package:calorio/widgets/drawer/main_drawer.dart';
 
-import 'package:calorio/providers/meal_provider.dart';
 import 'package:calorio/providers/favorites_provider.dart';
 import 'package:calorio/providers/filters_provider.dart';
 
@@ -39,23 +38,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final meals = ref.watch(mealsProvider);
-    final availableFilters = ref.watch(filtersProvider);
-    final availableMeals = meals.where((meal) {
-      if (availableFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
-        return false;
-      }
-      if (availableFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
-        return false;
-      }
-      if (availableFilters[Filter.vegan]! && !meal.isVegan) {
-        return false;
-      }
-      if (availableFilters[Filter.vegetarian]! && !meal.isVegetarian) {
-        return false;
-      }
-      return true;
-    }).toList();
+    final availableMeals = ref.watch(filteredMealsProvider);
     Widget selectedPage = CategoriesScreen(
       mealList: availableMeals,
     );
