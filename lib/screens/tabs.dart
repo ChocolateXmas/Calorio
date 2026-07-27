@@ -8,6 +8,7 @@ import 'package:calorio/models/meal.dart';
 import 'package:calorio/widgets/drawer/main_drawer.dart';
 
 import 'package:calorio/providers/meal_provider.dart';
+import 'package:calorio/providers/favorites_provider.dart';
 
 // Constant fallback to default filters settings
 const kInitialFilters = {
@@ -28,31 +29,7 @@ class TabsScreen extends ConsumerStatefulWidget {
 
 class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
-  final List<Meal> _favoriteMeals = [];
   Map<Filter, bool> _filterSelections = kInitialFilters;
-
-  void _toggleMealFavoriteStatus(String msg) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(msg),
-      ),
-    );
-  }
-
-  bool _isFavorite(Meal meal) => _favoriteMeals.contains(meal);
-
-  void _toggleFavoriteMeal(Meal meal) {
-    setState(() {
-      if (_isFavorite(meal)) {
-        _favoriteMeals.remove(meal);
-        _toggleMealFavoriteStatus('Meal Removed From Favorites');
-      } else {
-        _favoriteMeals.add(meal);
-        _toggleMealFavoriteStatus('Meal Added To Favorites');
-      }
-    });
-  }
 
   void _selectPage(int index) {
     setState(() => _selectedPageIndex = index);
@@ -94,15 +71,12 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     }).toList();
     Widget selectedPage = CategoriesScreen(
       mealList: availableMeals,
-      isFavorite: _isFavorite,
-      onToggleFavorite: _toggleFavoriteMeal,
     );
     String activePageTitle = 'Categories';
     if (_selectedPageIndex == 1) {
+      final List<Meal> favoriteMeals = ref.watch(favoriteMealProvider);
       selectedPage = MealsScreen(
-        meals: _favoriteMeals,
-        isFavorite: _isFavorite,
-        onToggleFavorite: _toggleFavoriteMeal,
+        meals: favoriteMeals,
       );
       activePageTitle = 'Your Favorite Meals';
     }

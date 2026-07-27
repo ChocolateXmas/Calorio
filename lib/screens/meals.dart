@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:calorio/models/meal.dart';
 import 'package:calorio/widgets/meal_widgets/meal_item/meal_item.dart';
 import 'package:calorio/widgets/meal_widgets/meal_details/meal_details.dart';
 
-class MealsScreen extends StatelessWidget {
+class MealsScreen extends ConsumerWidget {
   const MealsScreen({
     super.key,
     this.title,
     required this.meals,
-    required this.isFavorite,
-    required this.onToggleFavorite,
   });
 
   final String? title;
   final List<Meal> meals;
-  final bool Function(Meal meal) isFavorite;
-  final void Function(Meal meal) onToggleFavorite;
 
   void _selectMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => MealDetailsScreen(
           meal: meal,
-          isFavorite: isFavorite(meal),
-          onToggleFavorite: onToggleFavorite,
         ),
       ),
     );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Widget content = (meals.isNotEmpty)
         ? ListView.builder(
             itemCount: meals.length,

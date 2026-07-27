@@ -6,13 +6,9 @@ class MealDetailsScreen extends StatelessWidget {
   const MealDetailsScreen({
     super.key,
     required this.meal,
-    required this.isFavorite,
-    required this.onToggleFavorite,
   });
 
   final Meal meal;
-  final bool isFavorite;
-  final void Function(Meal meal) onToggleFavorite;
 
   Container _divider(BuildContext context) => Container(
     height: 1,
@@ -29,8 +25,6 @@ class MealDetailsScreen extends StatelessWidget {
         actions: [
           FavoriteToggleButton(
             meal: meal,
-            isFavorite: isFavorite,
-            onToggleFavorite: onToggleFavorite,
           ),
         ],
       ),
