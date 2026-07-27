@@ -14,10 +14,8 @@ class FavoriteToggleButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(favoriteMealProvider);
-    final bool isFavorite = ref
-        .read(favoriteMealProvider.notifier)
-        .isFavorite(meal);
+    final favoriteMealsList = ref.watch(favoriteMealProvider);
+    final isFavorite = favoriteMealsList.contains(meal);
     return IconButton(
       onPressed: () {
         final bool wasAdded = ref

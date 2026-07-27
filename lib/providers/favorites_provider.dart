@@ -21,8 +21,6 @@ class FavoriteMealNotifier extends Notifier<List<Meal>> {
       return true;
     }
   }
-
-  bool isFavorite(Meal meal) => state.contains(meal);
 }
 
 final favoriteMealProvider = NotifierProvider<FavoriteMealNotifier, List<Meal>>(
