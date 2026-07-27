@@ -26,6 +26,7 @@ class FavoriteToggleButton extends ConsumerWidget {
         ScaffoldMessenger.of(context).clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
+            behavior: SnackBarBehavior.floating,
             content: Text(
               wasAdded
                   ? 'Meal Added To Favorites'

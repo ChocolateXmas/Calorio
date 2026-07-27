@@ -25,9 +25,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: Scaffold(
-        body: const TabsScreen(),
-      ),
+      home: const TabsScreen(),
     );
   }
 }
