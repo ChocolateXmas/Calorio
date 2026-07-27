@@ -6,32 +6,10 @@ import 'package:calorio/core/constants/app_assets.dart';
 
 import 'package:calorio/providers/filters_provider.dart';
 
-class FiltersScreen extends ConsumerStatefulWidget {
+class FiltersScreen extends ConsumerWidget {
   const FiltersScreen({
     super.key,
   });
-
-  @override
-  ConsumerState<FiltersScreen> createState() {
-    return _FiltersScreenState();
-  }
-}
-
-class _FiltersScreenState extends ConsumerState<FiltersScreen> {
-  bool _glutenFreeFilter = false;
-  bool _lactoseFreeFilter = false;
-  bool _veganFilter = false;
-  bool _vegetarianFilter = false;
-
-  @override
-  void initState() {
-    super.initState();
-    final activeFilters = ref.read(filtersProvider);
-    _glutenFreeFilter = activeFilters[Filter.glutenFree]!;
-    _lactoseFreeFilter = activeFilters[Filter.lactoseFree]!;
-    _veganFilter = activeFilters[Filter.vegan]!;
-    _vegetarianFilter = activeFilters[Filter.vegetarian]!;
-  }
 
   SwitchListTile _getCustomTile(
     bool cValue,
@@ -39,6 +17,7 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
     String iconAsset,
     String cTitle,
     String cSubtitle,
+    BuildContext context,
   ) {
     return SwitchListTile(
       value: cValue,
@@ -72,65 +51,63 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final activeFilters = ref.watch(filtersProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Filters'),
       ),
-      body: PopScope(
-        canPop: false,
-        onPopInvokedWithResult: ((didPop, result) {
-          if (didPop) {
-            return;
-          }
-          ref.read(filtersProvider.notifier).setFilters({
-            Filter.glutenFree: _glutenFreeFilter,
-            Filter.lactoseFree: _lactoseFreeFilter,
-            Filter.vegan: _veganFilter,
-            Filter.vegetarian: _vegetarianFilter,
-          });
-          Navigator.of(context).pop();
-        }),
-        child: Column(
-          children: [
-            _getCustomTile(
-              _glutenFreeFilter,
-              (isChanged) {
-                setState(() => _glutenFreeFilter = isChanged);
-              },
-              AppAssets.glutenFree,
-              'Gluten-Free',
-              'Only include gluten-free meals',
-            ),
-            _getCustomTile(
-              _lactoseFreeFilter,
-              (isChanged) {
-                setState(() => _lactoseFreeFilter = isChanged);
-              },
-              AppAssets.lactoseFree,
-              'Lactose-Free',
-              'Only include lactose-free meals',
-            ),
-            _getCustomTile(
-              _veganFilter,
-              (isChanged) {
-                setState(() => _veganFilter = isChanged);
-              },
-              AppAssets.vegan,
-              'Vegan',
-              'Only include vegan meals',
-            ),
-            _getCustomTile(
-              _vegetarianFilter,
-              (isChanged) {
-                setState(() => _vegetarianFilter = isChanged);
-              },
-              AppAssets.vegetarian,
-              'Vegetarian',
-              'Only include vegetarian meals',
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          _getCustomTile(
+            activeFilters[Filter.glutenFree]!,
+            (isChanged) {
+              ref
+                  .read(filtersProvider.notifier)
+                  .setFilter(Filter.glutenFree, isChanged);
+            },
+            AppAssets.glutenFree,
+            'Gluten-Free',
+            'Only include gluten-free meals',
+            context,
+          ),
+          _getCustomTile(
+            activeFilters[Filter.lactoseFree]!,
+            (isChanged) {
+              ref
+                  .read(filtersProvider.notifier)
+                  .setFilter(Filter.lactoseFree, isChanged);
+            },
+            AppAssets.lactoseFree,
+            'Lactose-Free',
+            'Only include lactose-free meals',
+            context,
+          ),
+          _getCustomTile(
+            activeFilters[Filter.vegan]!,
+            (isChanged) {
+              ref
+                  .read(filtersProvider.notifier)
+                  .setFilter(Filter.vegan, isChanged);
+            },
+            AppAssets.vegan,
+            'Vegan',
+            'Only include vegan meals',
+            context,
+          ),
+          _getCustomTile(
+            activeFilters[Filter.vegetarian]!,
+            (isChanged) {
+              ref
+                  .read(filtersProvider.notifier)
+                  .setFilter(Filter.vegetarian, isChanged);
+            },
+            AppAssets.vegetarian,
+            'Vegetarian',
+            'Only include vegetarian meals',
+            context,
+          ),
+        ],
       ),
     );
   }
