@@ -35,6 +35,10 @@ class FavoriteToggleButton extends ConsumerWidget {
       },
       icon: AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
+        transitionBuilder: (child, animation) => ScaleTransition(
+          scale: Tween(begin: 0.5, end: 1.0).animate(animation),
+          child: child,
+        ),
         child: Icon(
           isFavorite ? Icons.star : Icons.star_outline,
           key: ValueKey(isFavorite),
